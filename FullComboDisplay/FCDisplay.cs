@@ -65,15 +65,11 @@ namespace FullComboDisplay
 
             var circleimage = ReflectionUtil.GetPrivateField<Image>(multi, "_multiplierProgressImage");
 
-            Console.WriteLine(multi.transform.position);
-
             img.sprite = circleimage.sprite;
             img.color = new Color(
                 ModPrefs.GetInt("FCDisplay", "ColorRed", 255, true),
                 ModPrefs.GetInt("FCDisplay", "ColorGreen", 200, true),
                 ModPrefs.GetInt("FCDisplay", "ColorBlue", 0, true));
-            
-            img.CrossFadeAlpha(0.1f, 0, false);
 
             g.transform.position = new Vector3(3.25f, 1.2f, 7f);
         }
@@ -81,26 +77,41 @@ namespace FullComboDisplay
         private void OnNoteMiss(NoteData data, int c)
         {
             if (data.noteType != NoteType.Bomb)
-                StartCoroutine(FlyAway());
+                StartCoroutine(Missed());
         }
         private void OnNoteCut(NoteData data, NoteCutInfo nci, int c)
         {
             if (data.noteType == NoteType.Bomb || !nci.allIsOK)
-                StartCoroutine(FlyAway());
+                StartCoroutine(Missed());
         }
 
-        bool startedFly = false;
-        IEnumerator FlyAway()
+        bool startedDelete = false;
+        IEnumerator Missed()
         {
-            if (!startedFly)
+            if (!startedDelete)
             {
-                startedFly = true;
-                img.CrossFadeAlpha(0, 0.4f, false);
-                for (int i = 0; i < 20; i++)
+                startedDelete = true;
+
+                string mode = ModPrefs.GetString("FCDisplay", "MissEffect", "FlyOut");
+
+                if (mode.ToLower() == "flyout")
                 {
-                    g.transform.Translate(new Vector3(0, 0, 0.5f));
-                    yield return new WaitForSeconds(0.02f);
+                    img.CrossFadeAlpha(0, 0.5f, false);
+                    for (int i = 0; i < 20; i++)
+                    {
+                        g.transform.Translate(new Vector3(0, 0, 0.5f));
+                        yield return new WaitForSeconds(0.025f);
+                    }
                 }
+                else if (mode.ToLower() == "fade")
+                {
+                    img.CrossFadeAlpha(0, 0.5f, false);
+                    yield return new WaitForSeconds(0.5f);
+                }
+                else
+                    img.CrossFadeAlpha(0, 0, false);
+
+                
                 Destroy(g);
                 Destroy(this);
             }

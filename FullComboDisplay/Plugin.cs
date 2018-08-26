@@ -27,6 +27,12 @@ namespace FulLComboDisplay
         public void OnApplicationStart()
         {
             SceneManager.activeSceneChanged += OnSceneChange;
+
+            // set defaults if they dont exist
+            ModPrefs.GetInt("FCDisplay", "ColorRed", 255, true);
+            ModPrefs.GetInt("FCDisplay", "ColorGreen", 200, true);
+            ModPrefs.GetInt("FCDisplay", "ColorBlue", 0, true);
+            ModPrefs.GetString("FCDisplay", "MissEffect", "FlyOut", true);
         }
         public void OnApplicationQuit()
         {
