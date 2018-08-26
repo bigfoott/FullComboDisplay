@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,9 @@ namespace FullComboDisplay
         Image img;
         GameObject g;
 
+        ScoreMultiplierUIController multi;
+        ScoreController score;
+
         private void Awake()
         {
             StartCoroutine(WaitForLoad());
@@ -26,10 +30,10 @@ namespace FullComboDisplay
             bool loaded = false;
             while (!loaded)
             {
-                var mutliplier = Resources.FindObjectsOfTypeAll<ScoreMultiplierUIController>().FirstOrDefault();
-                var score = Resources.FindObjectsOfTypeAll<ScoreController>().FirstOrDefault();
+                multi = Resources.FindObjectsOfTypeAll<ScoreMultiplierUIController>().FirstOrDefault();
+                score = Resources.FindObjectsOfTypeAll<ScoreController>().FirstOrDefault();
 
-                if (mutliplier == null || score == null)
+                if (multi == null || score == null)
                     yield return new WaitForSeconds(0.01f);
                 else
                     loaded = true;
@@ -39,7 +43,6 @@ namespace FullComboDisplay
 
         void Init()
         {
-            var score = Resources.FindObjectsOfTypeAll<ScoreController>().First();
             score.noteWasCutEvent += OnNoteCut;
             score.noteWasMissedEvent += OnNoteMiss;
 
@@ -52,7 +55,7 @@ namespace FullComboDisplay
             GraphicRaycaster gr = g.AddComponent<GraphicRaycaster>();
             g.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1f);
             g.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1f);
-            
+
             GameObject g2 = new GameObject();
             img = g2.AddComponent<Image>();
             g2.transform.parent = g.transform;
@@ -60,17 +63,19 @@ namespace FullComboDisplay
             g2.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 0.5f);
             g2.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
 
-            var circleimage = ReflectionUtil.GetPrivateField<Image>(Resources.FindObjectsOfTypeAll<ScoreMultiplierUIController>().First(), "_multiplierProgressImage");
-            
+            var circleimage = ReflectionUtil.GetPrivateField<Image>(multi, "_multiplierProgressImage");
+
+            Console.WriteLine(multi.transform.position);
+
             img.sprite = circleimage.sprite;
             img.color = new Color(
-                ModPrefs.GetInt("FCDisplay", "ColorRed", 100, true),
-                ModPrefs.GetInt("FCDisplay", "ColorGreen", 0, true),
-                ModPrefs.GetInt("FCDisplay", "ColorBlue", 150, true));
-            //img.material.shader = Shader.Find("Custom/SpriteNoGlow");
-            img.CrossFadeAlpha(0.5f, 0, false);
+                ModPrefs.GetInt("FCDisplay", "ColorRed", 255, true),
+                ModPrefs.GetInt("FCDisplay", "ColorGreen", 200, true),
+                ModPrefs.GetInt("FCDisplay", "ColorBlue", 0, true));
             
-            g.transform.position = new Vector3(-3.25f, 1.2f, 7f);
+            img.CrossFadeAlpha(0.1f, 0, false);
+
+            g.transform.position = new Vector3(3.25f, 1.2f, 7f);
         }
 
         private void OnNoteMiss(NoteData data, int c)
