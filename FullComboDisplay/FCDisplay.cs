@@ -111,6 +111,8 @@ namespace FullComboDisplay
                 else
                     img.CrossFadeAlpha(0, 0, false);
 
+                score.noteWasCutEvent -= OnNoteCut;
+                score.noteWasMissedEvent -= OnNoteMiss;
                 
                 Destroy(g);
                 Destroy(this);
