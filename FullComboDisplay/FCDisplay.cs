@@ -92,7 +92,7 @@ namespace FullComboDisplay
             {
                 startedDelete = true;
 
-                string mode = ModPrefs.GetString("FCDisplay", "MissEffect", "FlyOut");
+                string mode = ModPrefs.GetString("FCDisplay", "MissEffect", "Fade");
 
                 if (mode.ToLower() == "flyout")
                 {

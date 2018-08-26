@@ -32,7 +32,7 @@ namespace FulLComboDisplay
             ModPrefs.GetInt("FCDisplay", "ColorRed", 255, true);
             ModPrefs.GetInt("FCDisplay", "ColorGreen", 200, true);
             ModPrefs.GetInt("FCDisplay", "ColorBlue", 0, true);
-            ModPrefs.GetString("FCDisplay", "MissEffect", "FlyOut", true);
+            ModPrefs.GetString("FCDisplay", "MissEffect", "Fade", true);
         }
         public void OnApplicationQuit()
         {
