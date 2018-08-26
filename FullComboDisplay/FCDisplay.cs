@@ -64,12 +64,11 @@ namespace FullComboDisplay
             
             img.sprite = circleimage.sprite;
             img.color = new Color(
-                ModPrefs.GetInt("FCDisplay", "ColorRed", 255, true),
-                ModPrefs.GetInt("FCDisplay", "ColorGreen", 255, true),
-                ModPrefs.GetInt("FCDisplay", "ColorBlue", 0, true));
-            img.material.shader = Shader.Find("Custom/SpriteNoGlow");
-            img.CrossFadeAlpha(0.05f, 0, false);
-
+                ModPrefs.GetInt("FCDisplay", "ColorRed", 100, true),
+                ModPrefs.GetInt("FCDisplay", "ColorGreen", 0, true),
+                ModPrefs.GetInt("FCDisplay", "ColorBlue", 150, true));
+            //img.material.shader = Shader.Find("Custom/SpriteNoGlow");
+            img.CrossFadeAlpha(0.5f, 0, false);
             
             g.transform.position = new Vector3(-3.25f, 1.2f, 7f);
         }
