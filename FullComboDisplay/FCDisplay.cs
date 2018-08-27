@@ -14,26 +14,28 @@ namespace FullComboDisplay
 {
     class FCDisplay : MonoBehaviour
     {
-        Image img;
-        GameObject g;
+        private Image img;
+        private GameObject g;
 
-        ScoreMultiplierUIController multi;
-        ScoreController score;
+        private ScoreMultiplierUIController multi;
+        private ScoreController score;
+        private PlayerHeadAndObstacleInteraction obstacles;
 
         private void Awake()
         {
             StartCoroutine(WaitForLoad());
         }
 
-        IEnumerator WaitForLoad()
+        private IEnumerator WaitForLoad()
         {
             bool loaded = false;
             while (!loaded)
             {
                 multi = Resources.FindObjectsOfTypeAll<ScoreMultiplierUIController>().FirstOrDefault();
                 score = Resources.FindObjectsOfTypeAll<ScoreController>().FirstOrDefault();
+                obstacles = Resources.FindObjectsOfTypeAll<PlayerHeadAndObstacleInteraction>().FirstOrDefault();
 
-                if (multi == null || score == null)
+                if (multi == null || score == null || obstacles == null)
                     yield return new WaitForSeconds(0.01f);
                 else
                     loaded = true;
@@ -41,7 +43,7 @@ namespace FullComboDisplay
             Init();
         }
 
-        void Init()
+        private void Init()
         {
             score.noteWasCutEvent += OnNoteCut;
             score.noteWasMissedEvent += OnNoteMiss;
@@ -74,6 +76,11 @@ namespace FullComboDisplay
             g.transform.position = new Vector3(3.25f, 1.2f, 7f);
         }
 
+        private void Update()
+        {
+            if (obstacles != null && obstacles.intersectingObstacles.Count > 0 && !startedDelete)
+                StartCoroutine(Missed());
+        }
         private void OnNoteMiss(NoteData data, int c)
         {
             if (data.noteType != NoteType.Bomb)
@@ -84,9 +91,9 @@ namespace FullComboDisplay
             if (data.noteType == NoteType.Bomb || !nci.allIsOK)
                 StartCoroutine(Missed());
         }
-
-        bool startedDelete = false;
-        IEnumerator Missed()
+        
+        private bool startedDelete = false;
+        private IEnumerator Missed()
         {
             if (!startedDelete)
             {
