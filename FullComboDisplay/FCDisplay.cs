@@ -16,6 +16,7 @@ namespace FullComboDisplay
     {
         private Image img;
         private GameObject g;
+        private GameObject g2;
 
         private ScoreMultiplierUIController multi;
         private ScoreController score;
@@ -58,7 +59,7 @@ namespace FullComboDisplay
             g.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1f);
             g.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1f);
 
-            GameObject g2 = new GameObject();
+            g2 = new GameObject();
             img = g2.AddComponent<Image>();
             g2.transform.parent = g.transform;
             g2.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0.5f);
@@ -114,6 +115,15 @@ namespace FullComboDisplay
                 {
                     img.CrossFadeAlpha(0, 0.5f, false);
                     yield return new WaitForSeconds(0.5f);
+                }
+                else if (mode.ToLower() == "shrink")
+                {
+                    img.CrossFadeAlpha(0, 0.4f, false);
+                    for (int i = 0; i < 20; i++)
+                    {
+                        g2.transform.localScale = new Vector3(g2.transform.localScale.x - 0.125f, g2.transform.localScale.y - 0.125f, g2.transform.localScale.z - 0.125f);
+                        yield return new WaitForSeconds(0.02f);
+                    }
                 }
                 else
                     img.CrossFadeAlpha(0, 0, false);
