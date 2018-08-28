@@ -125,6 +125,26 @@ namespace FullComboDisplay
                         yield return new WaitForSeconds(0.02f);
                     }
                 }
+                else if (mode.ToLower() == "flicker")
+                {
+                    img.CrossFadeAlpha(0, 0.01f, false);
+                    yield return new WaitForSeconds(0.1f);
+                    img.CrossFadeAlpha(1, 0.01f, false);
+                    yield return new WaitForSeconds(0.08f);
+                    img.CrossFadeAlpha(0, 0.01f, false);
+                    yield return new WaitForSeconds(0.05f);
+                    img.CrossFadeAlpha(1, 0.01f, false);
+                    yield return new WaitForSeconds(0.05f);
+                    img.CrossFadeAlpha(0, 0.01f, false);
+                    yield return new WaitForSeconds(0.05f);
+                    img.CrossFadeAlpha(1, 0.01f, false);
+                    yield return new WaitForSeconds(0.03f);
+                    img.CrossFadeAlpha(0, 0.01f, false);
+                    yield return new WaitForSeconds(0.02f);
+                    img.CrossFadeAlpha(1, 0.01f, false);
+                    yield return new WaitForSeconds(0.02f);
+                    img.CrossFadeAlpha(0, 0.01f, false);
+                }
                 else
                     img.CrossFadeAlpha(0, 0, false);
 
