@@ -100,9 +100,9 @@ namespace FullComboDisplay
             {
                 startedDelete = true;
 
-                string mode = ModPrefs.GetString("FCDisplay", "MissEffect", "Fade");
+                string mode = ModPrefs.GetString("FCDisplay", "MissEffect", "Fade").ToLower();
 
-                if (mode.ToLower() == "flyout")
+                if (mode == "flyout")
                 {
                     img.CrossFadeAlpha(0, 0.5f, false);
                     for (int i = 0; i < 20; i++)
@@ -111,21 +111,24 @@ namespace FullComboDisplay
                         yield return new WaitForSeconds(0.025f);
                     }
                 }
-                else if (mode.ToLower() == "fade")
+                else if (mode == "fade")
                 {
                     img.CrossFadeAlpha(0, 0.5f, false);
                     yield return new WaitForSeconds(0.5f);
                 }
-                else if (mode.ToLower() == "shrink")
+                else if (mode == "shrink")
                 {
                     img.CrossFadeAlpha(0, 0.4f, false);
                     for (int i = 0; i < 20; i++)
                     {
-                        g2.transform.localScale = new Vector3(g2.transform.localScale.x - 0.125f, g2.transform.localScale.y - 0.125f, g2.transform.localScale.z - 0.125f);
+                        g2.transform.localScale = new Vector3(
+                            g2.transform.localScale.x - 0.125f, 
+                            g2.transform.localScale.y - 0.125f, 
+                            g2.transform.localScale.z - 0.125f);
                         yield return new WaitForSeconds(0.02f);
                     }
                 }
-                else if (mode.ToLower() == "flicker")
+                else if (mode == "flicker")
                 {
                     img.CrossFadeAlpha(0, 0.01f, false);
                     yield return new WaitForSeconds(0.1f);
@@ -145,8 +148,6 @@ namespace FullComboDisplay
                     yield return new WaitForSeconds(0.02f);
                     img.CrossFadeAlpha(0, 0.01f, false);
                 }
-                else
-                    img.CrossFadeAlpha(0, 0, false);
 
                 score.noteWasCutEvent -= OnNoteCut;
                 score.noteWasMissedEvent -= OnNoteMiss;

@@ -13,14 +13,13 @@ namespace FulLComboDisplay
     {
 
         public string Name => "Full Combo Display";
-        public string Version => "1.0.1";
+        public string Version => "1.1.0";
 
         private readonly string[] env = { "DefaultEnvironment", "BigMirrorEnvironment", "TriangleEnvironment", "NiceEnvironment" };
 
         private void OnSceneChange(Scene arg0, Scene arg1)
         {
             if (!env.Contains(arg1.name)) return;
-
             new GameObject("FCDisplay").AddComponent<FCDisplay>();
         }
         
