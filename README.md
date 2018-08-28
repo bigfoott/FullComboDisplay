@@ -10,4 +10,4 @@ Add the .dll to the Plugins folder of your game and launch the game. Default set
 
 **`ColorRed`**, **`ColorGreen`**, **`ColorBlue`** - Set the RGB color of the FC ring.
 
-**`MissEffect`** - Can be [FlyOut](https://bigft.io/i/demo_flyout.gif) or [Fade](https://bigft.io/i/demo_fade.gif).
+**`MissEffect`** - Can be [FlyOut](https://bigft.io/i/demo_flyout.gif), [Fade](https://bigft.io/i/demo_fade.gif), [Flicker](https://bigft.io/i/demo_flicker.gif), or [Shrink](https://bigft.io/i/demo_shrink.gif).
