@@ -13,7 +13,7 @@ namespace FulLComboDisplay
     {
 
         public string Name => "Full Combo Display";
-        public string Version => "1.1.0";
+        public string Version => "1.1.1";
 
         private readonly string[] env = { "DefaultEnvironment", "BigMirrorEnvironment", "TriangleEnvironment", "NiceEnvironment" };
 

@@ -49,7 +49,7 @@ namespace FullComboDisplay
             score.noteWasCutEvent += OnNoteCut;
             score.noteWasMissedEvent += OnNoteMiss;
 
-            g = new GameObject();
+            g = new GameObject("FCRing");
             Canvas canvas = g.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.WorldSpace;
             CanvasScaler cs = g.AddComponent<CanvasScaler>();
