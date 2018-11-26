@@ -1,13 +1,9 @@
 ﻿using IllusionPlugin;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using FullComboDisplay.Util;
 
 
 namespace FullComboDisplay
@@ -58,7 +54,7 @@ namespace FullComboDisplay
             GraphicRaycaster gr = g.AddComponent<GraphicRaycaster>();
             g.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1f);
             g.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1f);
-
+            
             g2 = new GameObject();
             img = g2.AddComponent<Image>();
             g2.transform.parent = g.transform;
@@ -71,10 +67,10 @@ namespace FullComboDisplay
             img.sprite = circleimage.sprite;
             img.color = new Color(
                 ModPrefs.GetInt("FCDisplay", "ColorRed", 255, true),
-                ModPrefs.GetInt("FCDisplay", "ColorGreen", 200, true),
-                ModPrefs.GetInt("FCDisplay", "ColorBlue", 0, true));
-
-            g.transform.position = new Vector3(3.25f, 1.2f, 7f);
+                ModPrefs.GetInt("FCDisplay", "ColorGreen", 255, true),
+                ModPrefs.GetInt("FCDisplay", "ColorBlue", 255, true));
+            
+            g.transform.position = new Vector3(3.025f, 1.2f, 7.08f);
         }
 
         private void Update()
@@ -100,9 +96,9 @@ namespace FullComboDisplay
             {
                 startedDelete = true;
 
-                string mode = ModPrefs.GetString("FCDisplay", "MissEffect", "Fade").ToLower();
+                string mode = Plugin.effects[ModPrefs.GetInt("FCDisplay", "MissEffect", 1)];
 
-                if (mode == "flyout")
+                if (mode == "FlyOut")
                 {
                     img.CrossFadeAlpha(0, 0.5f, false);
                     for (int i = 0; i < 20; i++)
@@ -111,12 +107,12 @@ namespace FullComboDisplay
                         yield return new WaitForSeconds(0.025f);
                     }
                 }
-                else if (mode == "fade")
+                else if (mode == "Fade")
                 {
                     img.CrossFadeAlpha(0, 0.5f, false);
                     yield return new WaitForSeconds(0.5f);
                 }
-                else if (mode == "shrink")
+                else if (mode == "Shrink")
                 {
                     img.CrossFadeAlpha(0, 0.4f, false);
                     for (int i = 0; i < 20; i++)
@@ -128,7 +124,7 @@ namespace FullComboDisplay
                         yield return new WaitForSeconds(0.02f);
                     }
                 }
-                else if (mode == "flicker")
+                else if (mode == "Flicker")
                 {
                     img.CrossFadeAlpha(0, 0.01f, false);
                     yield return new WaitForSeconds(0.1f);

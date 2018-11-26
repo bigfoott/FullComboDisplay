@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FullComboDisplay
+namespace FullComboDisplay.Util
 {
     public static class ReflectionUtil
     {
