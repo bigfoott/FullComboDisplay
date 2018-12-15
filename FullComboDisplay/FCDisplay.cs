@@ -70,7 +70,7 @@ namespace FullComboDisplay
                 ModPrefs.GetInt("FCDisplay", "ColorGreen", 255, true),
                 ModPrefs.GetInt("FCDisplay", "ColorBlue", 255, true));
             
-            g.transform.position = new Vector3(3f, 1.2f, 7f);
+            g.transform.position = new Vector3(3.2f, 1.5f, 7f);
         }
 
         private void Update()
