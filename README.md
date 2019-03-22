@@ -12,6 +12,10 @@ Add the .dll to the Plugins folder of your game and launch the game. Default set
 
 **NOTE:** Miss Effect can be changed in the in-game settings menu.
 
-**`ColorRed`**, **`ColorGreen`**, **`ColorBlue`** - Set the RGB color of the FC ring.
+**`Enabled`** - Enable/Disable the mod.
 
 **`MissEffect`** - Can be [FlyOut](https://bigft.io/i/demo_flyout.gif), [Fade](https://bigft.io/i/demo_fade.gif), [Flicker](https://bigft.io/i/demo_flicker.gif), or [Shrink](https://bigft.io/i/demo_shrink.gif).
+
+**`ColorRed`**, **`ColorGreen`**, **`ColorBlue`** - Set the RGB color of the FC ring.
+
+**`VanillaEnabled`** - Show or hide the vanilla full combo display (the lines above and below the combo count)
