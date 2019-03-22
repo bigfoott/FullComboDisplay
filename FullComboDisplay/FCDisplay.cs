@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using FullComboDisplay.Util;
-
+using System;
 
 namespace FullComboDisplay
 {
@@ -17,6 +17,7 @@ namespace FullComboDisplay
         private ScoreMultiplierUIController multi;
         private ScoreController score;
         private PlayerHeadAndObstacleInteraction obstacles;
+        private GameObject comboPanel;
 
         private void Awake()
         {
@@ -31,8 +32,9 @@ namespace FullComboDisplay
                 multi = Resources.FindObjectsOfTypeAll<ScoreMultiplierUIController>().FirstOrDefault();
                 score = Resources.FindObjectsOfTypeAll<ScoreController>().FirstOrDefault();
                 obstacles = Resources.FindObjectsOfTypeAll<PlayerHeadAndObstacleInteraction>().FirstOrDefault();
+                comboPanel = GameObject.Find("ComboPanel");
 
-                if (multi == null || score == null || obstacles == null)
+                if (multi == null || score == null || obstacles == null || comboPanel == null)
                     yield return new WaitForSeconds(0.01f);
                 else
                     loaded = true;
@@ -71,6 +73,10 @@ namespace FullComboDisplay
                 ModPrefs.GetInt("FCDisplay", "ColorBlue", 255, true));
             
             g.transform.position = new Vector3(3.2f, 1.5f, 7f);
+
+            if (ModPrefs.GetBool("FCDisplay", "VanillaEnabled", false, true)) return;
+            comboPanel.transform.Find("Line0").gameObject.SetActive(false);
+            comboPanel.transform.Find("Line1").gameObject.SetActive(false);
         }
 
         private void Update()
