@@ -10,7 +10,7 @@ Add the .dll to the Plugins folder of your game and launch the game. Default set
 
 ## Configuration
 
-**NOTE:** Miss Effect can be changed in the in-game settings menu.
+**NOTE:** `Enabled`, `MissEffect`, and `VanillaEnabled` can be changed in the in-game settings menu.
 
 **`Enabled`** - Enable/Disable the mod.
 
