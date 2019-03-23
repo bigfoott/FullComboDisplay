@@ -10,7 +10,7 @@ namespace FullComboDisplay
     {
 
         public string Name => "Full Combo Display";
-        public string Version => "2.1.0";
+        public string Version => "2.1.1";
 
         public static string[] effects = { "Fade", "FlyOut", "Flicker", "Shrink" };
 
